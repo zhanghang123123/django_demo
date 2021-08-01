@@ -23,5 +23,5 @@ urlpatterns = [
     path('projects/', views.show),
     path('pro1/', views.get_project),
     path('prox/<int:id>/', views.get_project_by_id),
-    re_path(r'^projects/(?P<username>\w{6,12})$', views.get_users),
+    re_path(r'^projects/(?P<username>\w{6,12})/$', views.get_users),  # 最后一个'/'不要忘了
 ]
