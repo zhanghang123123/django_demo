@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'projects',  # 或者 'projects.apps.ProjectsConfig'  即projects子应用下apps.py中的ProjectsConfig函数
 ]
 
 MIDDLEWARE = [
