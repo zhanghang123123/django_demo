@@ -13,15 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, re_path
-
+from django.urls import path, include
 from projects import views
+
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('projects/', views.show),
-    path('pro1/', views.get_project),
+    # path('projects/', views.show),
+    path('projects/', include('projects.urls')),  # include 中指定的是子路由的路径（所以是字符串）
     path('prox/<int:id>/', views.get_project_by_id),
-    re_path(r'^projects/(?P<username>\w{6,12})/$', views.get_users),  # 最后一个'/'不要忘了
 ]
