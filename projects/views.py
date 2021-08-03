@@ -24,7 +24,29 @@ class ProjectView(View):
     def get(self, request, *args, **kwargs):
         # get 的详细操作
         # return HttpResponse(f"<h1>获取这个{kwargs.get(id)}项目</h1>") # 语法错误，get方法中是 ""
-        return HttpResponse(f"<h1>获取这个{kwargs.get('id')}项目</h1>")
+        # return HttpResponse(f"<h1>获取这个{kwargs.get('id')}项目</h1>")
+
+        #####
+        # a. 从数据库中读取数据项目
+        # b. 数据自动填充到html 模板中
+        datas = [
+            {
+                "project_name" : "前程贷项目1",
+                "leader" : "keyou",
+                "app_name" : "p2p平台应用1",
+            },
+            {
+                "project_name": "前程贷项目2",
+                "leader": "hang",
+                "app_name": "p2p平台应用2",
+            },
+            {
+                "project_name": "前程贷项目3",
+                "leader": "zhang",
+                "app_name": "p2p平台应用3",
+            },
+        ]
+        return render(request, 'index.html', locals())  # render 渲染html
 
     def post(self, request, *args, **kwargs):
         # post 的一些列操作

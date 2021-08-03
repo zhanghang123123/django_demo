@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,10 +54,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_demo.urls'
 
+# 模板引擎的配置，'BACKEND' 指定模板引擎
+# 模板引擎是Django框架能正确识别HTML页面的一个模板，能够解析成浏览器正常打开的页面
+# DIRS 指定模板存放的路径
+# BASE_DIR 是项目的根路径
+# APP_DIRS 指定子应用能否创建模板，True即为 子应用中能创建模板，且需要加到 DIRS 列表中
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
