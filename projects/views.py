@@ -50,7 +50,7 @@ class ProjectView(View):
         # 上面直接返回（render）的是一个html模板，是前后端不分离的模式
         # 下面返回的是数据，将前端和后段分离开来，返回的是数据, 这样不仅可以给html用，还可以给手机
         # （不管是安卓还是IOS）APP，小程序等用
-        return JsonResponse(datas, safe=False, status=200)
+        return JsonResponse(datas, safe=False, status=200, json_dumps_params={'ensure_ascii': False})
 
     def post(self, request, *args, **kwargs):
         # post 的一些列操作
