@@ -3,6 +3,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
+from projects.models import Projects
+from interfaces.models import Interfaces
 
 
 def show(request):
@@ -25,15 +27,28 @@ class ProjectView(View):
         # get 的详细操作
         # return HttpResponse(f"<h1>获取这个{kwargs.get(id)}项目</h1>") # 语法错误，get方法中是 ""
         # return HttpResponse(f"<h1>获取这个{kwargs.get('id')}项目</h1>")
+        # 添加数据方法一
+        # onemethod_object = Projects(name='在线商城2', leader='mrf2')
+        # onemethod_object.save()
+        # 添加数据方法二（推荐，不用save）
+        twomethod_object = Projects.objects.create(name='在线商城4', leader='mrf4', is_execute=False, description='好项目')
+
+        # 创建从表数据
+        # 关联父表
+        #   > 先获取到父表模型对象
+        project_1 = Projects.objects.get(id=1)
+        twomethod_object = Interfaces.objects.create(name='登陆接口',
+                                                     tester='mrf3',
+                                                     projects=project_1)  # 必须填，要关联父表 或projects_id=project_1.id
 
         #####
         # a. 从数据库中读取数据项目
         # b. 数据自动填充到html 模板中
         datas = [
             {
-                "project_name" : "前程贷项目1",
-                "leader" : "kk",
-                "app_name" : "p2p平台应用1",
+                "project_name": "前程贷项目1",
+                "leader": "kk",
+                "app_name": "p2p平台应用1",
             },
             {
                 "project_name": "前程贷项目2",
@@ -50,10 +65,13 @@ class ProjectView(View):
         # 上面直接返回（render）的是一个html模板，是前后端不分离的模式
         # 下面返回的是数据，将前端和后段分离开来，返回的是数据, 这样不仅可以给html用，还可以给手机
         # （不管是安卓还是IOS）APP，小程序等用
-        return JsonResponse(datas, safe=False, status=200, json_dumps_params={'ensure_ascii': False})
+        ret = JsonResponse(datas, safe=False, status=200, json_dumps_params={'ensure_ascii': False})
+        return ret
 
     def post(self, request, *args, **kwargs):
         # post 的一些列操作
+        one_object = Projects(name='在线商城', leader='mrf')
+        one_object.save()
         return HttpResponse("<h1>修改这个项目</h1>")
 
     def put(self, request, *args, **kwargs):
