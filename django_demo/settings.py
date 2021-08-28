@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework'
     'projects',  # 或者 'projects.apps.ProjectsConfig'  即projects子应用下apps.py中的ProjectsConfig函数
     'interfaces',
 ]
